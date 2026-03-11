@@ -1,38 +1,28 @@
+"use client";
+
+import type { ReactNode } from "react";
+
 interface AdminHeaderProps {
   title: string;
-  subtitle?: string;
-  action?: React.ReactNode;
+  description?: string;
+  action?: ReactNode;
 }
 
 export default function AdminHeader({
   title,
-  subtitle,
+  description,
   action,
 }: AdminHeaderProps) {
-  const parts = title.split("/");
-
   return (
     <div className="admin-header">
       <div className="admin-header__content">
-        <div>
-          {parts.length > 1 ? (
-            <h1 className="admin-title">
-              <span className="admin-title__white">{parts[0].trim()}</span>{" "}
-              <span className="admin-title__green">/ {parts[1].trim()}</span>
-            </h1>
-          ) : (
-            <h1 className="admin-title">
-              <span className="admin-title__white">{title}</span>
-            </h1>
-          )}
-
-          {subtitle && <p className="admin-subtitle">{subtitle}</p>}
-        </div>
-
-        {action ? <div className="admin-header__action">{action}</div> : null}
+        <h1 className="admin-page-title">{title}</h1>
+        {description && (
+          <p className="admin-page-description">{description}</p>
+        )}
       </div>
 
-      <div className="admin-header__divider" />
+      {action && <div className="admin-header__action">{action}</div>}
     </div>
   );
 }
